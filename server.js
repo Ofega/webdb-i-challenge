@@ -5,7 +5,6 @@ const db = require('./data/dbConfig.js');
 const server = express();
 
 server.use(express.json());
-
   
 // Endpoints
 server.route('/api/accounts')
@@ -44,6 +43,7 @@ server.route('/api/accounts/:id')
     })
     .put((req, res, next) => {
         const { id } = req.params;
+        const { name, budget } = req.body;
         db('accounts').where({ id }).update({ name, budget })
             .then(result => {
                 res.status(200).json(result);
